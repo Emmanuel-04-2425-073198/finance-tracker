@@ -1,0 +1,401 @@
+/*
+ * This file contains the CSS styles for the Personal Finance Tracker.
+ * It's kept in a separate file for better organization and maintenance.
+ */
+
+/* Importing a modern font from Google Fonts. */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+
+/* Tailwind CSS classes and custom styles are combined here. */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Base styles for the body.
+ * A dark theme for a cool, modern feel.
+ */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #111827; /* Tailwind gray-900 */
+    color: #f3f4f6; /* Tailwind gray-100 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+/*
+ * Main container for the application.
+ * Styles for the dark card effect.
+ */
+.main-container {
+    background-color: #1f2937; /* Tailwind gray-800 */
+    padding: 2rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 48rem;
+    border: 1px solid #374151; /* Tailwind gray-700 */
+    animation: fadeIn 0.5s ease-out forwards;
+    position: relative;
+}
+
+/*
+ * Animations for a dynamic user experience.
+ */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/*
+ * Reusable component styles
+ */
+.app-title {
+    font-size: 2.5rem;
+    font-weight: 800; /* Tailwind font-extrabold */
+    color: #e5e7eb;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    letter-spacing: -0.025em; /* Tailwind tracking-tight */
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #e5e7eb;
+    margin-bottom: 1rem;
+}
+
+/*
+ * Balance and stat card sections
+ */
+.balance-section {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    text-align: center;
+    background-color: #1f2937;
+    box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+.balance-label {
+    font-size: 1.125rem;
+    color: #9ca3af;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.balance-amount {
+    font-size: 3rem;
+    font-weight: 800;
+    color: #e5e7eb;
+    margin-top: 0.5rem;
+}
+
+.stat-cards-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    border-radius: 1rem;
+    padding: 1.5rem;
+    text-align: center;
+    color: #fff;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease-in-out;
+}
+.stat-card:hover {
+    transform: scale(1.05);
+}
+
+.stat-card-income {
+    background-image: linear-gradient(to right, #10b981, #34d399); /* Tailwind green gradient */
+}
+
+.stat-card-expense {
+    background-image: linear-gradient(to right, #ef4444, #f87171); /* Tailwind red gradient */
+}
+
+.stat-label {
+    font-size: 1.125rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.stat-amount {
+    font-size: 1.5rem;
+    margin-top: 0.5rem;
+    font-weight: 700;
+}
+
+/*
+ * Transaction form styles
+ */
+.transaction-form-section {
+    margin-bottom: 2rem;
+}
+
+.validation-message {
+    color: #fca5a5; /* Tailwind red-400 */
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    display: none;
+}
+
+.input-container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1rem;
+}
+
+@media (min-width: 768px) {
+    .input-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.input-label {
+    display: block;
+    font-size: 0.875rem;
+    color: #9ca3af;
+    margin-bottom: 0.25rem;
+}
+
+.input-field {
+    width: 100%;
+    padding: 0.75rem;
+    border: none;
+    background-color: #374151;
+    border-radius: 0.75rem;
+    color: #e5e7eb;
+    transition: all 0.2s;
+}
+.input-field::placeholder {
+    color: #6b7280;
+}
+.input-field:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #3b82f6; /* Tailwind blue-500 ring */
+}
+
+.button-container {
+    margin-top: 1rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.add-btn {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 0.75rem;
+    color: #fff;
+    font-weight: 600;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: background-color 0.2s ease-in-out;
+}
+
+.add-btn-income {
+    background-color: #10b981;
+}
+.add-btn-income:hover {
+    background-color: #059669;
+}
+
+.add-btn-expense {
+    background-color: #ef4444;
+}
+.add-btn-expense:hover {
+    background-color: #dc2626;
+}
+
+/*
+ * History section styles
+ */
+.history-section {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+.clear-btn {
+    font-size: 0.875rem;
+    color: #f87171;
+    transition: color 0.2s ease-in-out;
+}
+.clear-btn:hover {
+    color: #fca5a5;
+}
+
+.history-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.transaction-item {
+    padding: 1rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.2s ease-in-out;
+}
+.transaction-item:hover {
+    transform: translateX(5px);
+}
+
+.transaction-item.income {
+    background-color: #2b3a4a;
+    color: #4ade80;
+}
+
+.transaction-item.expense {
+    background-color: #2b3a4a;
+    color: #f87171;
+}
+
+.item-details {
+    flex: 1;
+}
+
+.item-description {
+    font-weight: 500;
+}
+
+.item-date {
+    display: block;
+    font-size: 0.75rem;
+    color: #9ca3af;
+    margin-top: 0.25rem;
+}
+
+.item-amount {
+    font-weight: 600;
+    font-size: 1.125rem;
+}
+
+.delete-btn {
+    margin-left: 1rem;
+    color: #9ca3af;
+    transition: color 0.2s ease-in-out;
+}
+.delete-btn:hover {
+    color: #e5e7eb;
+}
+
+/* Theme Toggle Button Styles */
+.theme-toggle {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: #f3f4f6; /* Default to white for dark mode */
+    padding: 0.5rem;
+    border-radius: 9999px;
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1);
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/*
+ * Added rule to make the icons more visible.
+ * This overrides the default size specified in the HTML.
+ */
+.theme-toggle svg {
+    width: 2rem;
+    height: 2rem;
+}
+
+/* --- Light Mode Styles --- */
+/* These styles are applied when the body has the .light-mode-active class */
+body.light-mode-active {
+    background-color: #f9fafb; /* Tailwind gray-50 */
+    color: #1f2937; /* Tailwind gray-800 */
+}
+
+body.light-mode-active .main-container {
+    background-color: #fff;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    border: 1px solid #e5e7eb; /* Tailwind gray-200 */
+}
+
+body.light-mode-active .app-title,
+body.light-mode-active .section-title,
+body.light-mode-active .balance-amount,
+body.light-mode-active .input-field {
+    color: #1f2937; /* Tailwind gray-800 */
+}
+
+body.light-mode-active .balance-section {
+    background-color: #f3f4f6; /* Tailwind gray-100 */
+    box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.04);
+}
+
+body.light-mode-active .balance-label,
+body.light-mode-active .input-label,
+body.light-mode-active .item-date {
+    color: #6b7280; /* Tailwind gray-500 */
+}
+
+body.light-mode-active .input-field {
+    background-color: #e5e7eb; /* Tailwind gray-200 */
+}
+body.light-mode-active .input-field::placeholder {
+    color: #9ca3af; /* Tailwind gray-400 */
+}
+body.light-mode-active .input-field:focus {
+    box-shadow: 0 0 0 2px #60a5fa; /* Tailwind blue-400 */
+}
+
+body.light-mode-active .stat-card-income {
+    background-image: linear-gradient(to right, #4ade80, #86efac); /* Brighter green gradient */
+}
+
+body.light-mode-active .stat-card-expense {
+    background-image: linear-gradient(to right, #f87171, #fca5a5); /* Brighter red gradient */
+}
+
+body.light-mode-active .transaction-item {
+    background-color: #e5e7eb;
+}
+
+body.light-mode-active .transaction-item.income {
+    color: #10b981;
+}
+
+body.light-mode-active .transaction-item.expense {
+    color: #ef4444;
+}
+
+body.light-mode-active .clear-btn,
+body.light-mode-active .delete-btn {
+    color: #ef4444;
+}
+body.light-mode-active .delete-btn:hover {
+    color: #dc2626;
+}
+
+body.light-mode-active .theme-toggle {
+    color: #1f2937; /* Change icon color for light mode */
+}
