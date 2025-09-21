@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Finance Tracker</title>
+    <!-- 
+        This is the link to the external CSS file.
+        It tells the browser to use the styles from 'style.css'.
+    -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* This is a fallback font in case the main font doesn't load. */
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex items-center justify-center min-h-screen p-4">
+
+    <div class="main-container">
+        <!-- Theme toggle button -->
+        <button id="theme-toggle" class="theme-toggle">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 sun-icon">
+                <path d="M12 2.25a.75.75 0 0 1 .75.75v2.25a.75.75 0 0 1-1.5 0V3a.75.75 0 0 1 .75-.75ZM7.584 6.25a.75.75 0 0 0-1.06-1.06L4.34 6.34a.75.75 0 0 0 1.06 1.06l2.124-2.124ZM14.996 11.25a.75.75 0 0 0-1.25-1.096l-.014.014a5.125 5.125 0 0 0-5.83-5.83l.015-.015a.75.75 0 0 0-1.096-1.25.75.75 0 0 0-.687.164.75.75 0 0 0 .164.687l.015.014a3.625 3.625 0 0 1 4.128 4.128l.014.015.015.014a.75.75 0 0 0 1.096 1.25Z" />
+                <path d="M12 18a.75.75 0 0 1-.75.75v2.25a.75.75 0 0 1 1.5 0V18a.75.75 0 0 1-.75-.75ZM16.416 17.75a.75.75 0 0 0 1.06 1.06l2.124-2.124a.75.75 0 0 0-1.06-1.06l-2.124 2.124Zm2.124-7.825a.75.75 0 0 0-1.06-1.06l-2.124 2.124a.75.75 0 0 0 1.06 1.06l2.124-2.124ZM3 12a.75.75 0 0 1 .75-.75h2.25a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12Zm11.25-9.75a.75.75 0 0 0-.687.164.75.75 0 0 0-.164.687.75.75 0 0 0 .687.164l.014-.015.015-.014a3.625 3.625 0 0 1 4.128 4.128l.014.015.015.014a.75.75 0 0 0 1.096 1.25.75.75 0 0 0 .687-.164.75.75 0 0 0-.164-.687l-.014-.015-.015-.014a5.125 5.125 0 0 0-5.83-5.83ZM12 15.75a3.75 3.75 0 1 0 0-7.5 3.75 3.75 0 0 0 0 7.5ZM12 17.25a5.25 5.25 0 1 1 0-10.5 5.25 5.25 0 0 1 0 10.5Z" />
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 moon-icon hidden">
+                <path fill-rule="evenodd" d="M9.546 1.002a.75.75 0 0 1 .786.136 7.5 7.5 0 0 0 9.13 9.13.75.75 0 0 1 .136.786c-1.444 2.665-4.048 4.512-6.99 4.512-4.136 0-7.5-3.364-7.5-7.5 0-2.942 1.847-5.546 4.512-6.99Z" clip-rule="evenodd" />
+            </svg>
+        </button>
+
+        <h1 class="app-title">
+            Baby Kent's Personal Finance Tracker
+        </h1>
+
+        <!-- Balance Section -->
+        <div class="balance-section">
+            <h2 class="balance-label">Current Balance</h2>
+            <p id="balance" class="balance-amount">₱0.00</p>
+        </div>
+
+        <!-- Income and Expenses -->
+        <div class="stat-cards-container">
+            <div class="stat-card stat-card-income">
+                <h2 class="stat-label">Income</h2>
+                <p id="income" class="stat-amount">₱0.00</p>
+            </div>
+            <div class="stat-card stat-card-expense">
+                <h2 class="stat-label">Expenses</h2>
+                <p id="expenses" class="stat-amount">₱0.00</p>
+            </div>
+        </div>
+
+        <!-- Transaction Form -->
+        <div class="transaction-form-section">
+            <h2 class="section-title">Add Transaction</h2>
+            <div id="validationMessage" class="validation-message hidden"></div>
+            <div class="input-container">
+                <div>
+                    <label for="description" class="input-label">Description</label>
+                    <input type="text" id="description" placeholder="e.g., Paycheck, Groceries" class="input-field">
+                </div>
+                <div>
+                    <label for="amount" class="input-label">Amount</label>
+                    <input type="number" id="amount" placeholder="e.g., 50.00" class="input-field">
+                </div>
+            </div>
+            <div class="button-container">
+                <button id="addIncomeBtn" class="add-btn add-btn-income">Add Income</button>
+                <button id="addExpenseBtn" class="add-btn add-btn-expense">Add Expense</button>
+            </div>
+        </div>
+
+        <!-- Transaction History -->
+        <div class="history-section">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="section-title">History</h2>
+                <button id="clearTransactionsBtn" class="clear-btn">Clear All</button>
+            </div>
+            <ul id="transactionList" class="history-list">
+                <!-- Transactions will be added here -->
+            </ul>
+        </div>
+
+    </div>
+
+<script>
+    // Get references to all HTML elements
+    const balanceDisplay = document.getElementById('balance');
+    const incomeDisplay = document.getElementById('income');
+    const expensesDisplay = document.getElementById('expenses');
+    const descriptionInput = document.getElementById('description');
+    const amountInput = document.getElementById('amount');
+    const addIncomeBtn = document.getElementById('addIncomeBtn');
+    const addExpenseBtn = document.getElementById('addExpenseBtn');
+    const transactionList = document.getElementById('transactionList');
+    const clearTransactionsBtn = document.getElementById('clearTransactionsBtn');
+    const validationMessage = document.getElementById('validationMessage');
+    const themeToggleBtn = document.getElementById('theme-toggle');
+
+    // Load transactions from local storage on page load
+    let transactions = JSON.parse(localStorage.getItem('transactions')) || [];
+
+    // --- Theme Toggling Logic ---
+    const currentTheme = localStorage.getItem('theme') || 'dark';
+    document.body.className = currentTheme === 'dark' ? 'bg-gray-900 text-gray-100 dark-mode-active' : 'light-mode-active';
+    updateThemeIcons(currentTheme);
+
+    themeToggleBtn.addEventListener('click', () => {
+        if (document.body.classList.contains('light-mode-active')) {
+            document.body.classList.remove('light-mode-active');
+            document.body.classList.add('dark-mode-active');
+            localStorage.setItem('theme', 'dark');
+            updateThemeIcons('dark');
+        } else {
+            document.body.classList.remove('dark-mode-active');
+            document.body.classList.add('light-mode-active');
+            localStorage.setItem('theme', 'light');
+            updateThemeIcons('light');
+        }
+    });
+
+    function updateThemeIcons(theme) {
+        const sunIcon = themeToggleBtn.querySelector('.sun-icon');
+        const moonIcon = themeToggleBtn.querySelector('.moon-icon');
+        if (theme === 'dark') {
+            sunIcon.classList.remove('hidden');
+            moonIcon.classList.add('hidden');
+        } else {
+            sunIcon.classList.add('hidden');
+            moonIcon.classList.remove('hidden');
+        }
+    }
+
+    // Function to update the display based on transactions
+    function updateDisplay() {
+        const income = transactions.filter(t => t.type === 'income').reduce((acc, t) => acc + t.amount, 0);
+        const expenses = transactions.filter(t => t.type === 'expense').reduce((acc, t) => acc + t.amount, 0);
+        const balance = income - expenses;
+
+        // Change the currency symbol to ₱
+        balanceDisplay.textContent = `₱${balance.toFixed(2)}`;
+        incomeDisplay.textContent = `₱${income.toFixed(2)}`;
+        expensesDisplay.textContent = `₱${expenses.toFixed(2)}`;
+
+        // Render the transaction history list
+        transactionList.innerHTML = '';
+        transactions.forEach(renderTransaction);
+    }
+
+    // Function to render a single transaction item in the list
+    function renderTransaction(transaction) {
+        const li = document.createElement('li');
+        li.className = `transaction-item ${transaction.type}`;
+        
+        // Use a more detailed inner HTML to show date and a delete icon
+        const date = new Date(transaction.id).toLocaleDateString();
+        li.innerHTML = `
+            <div class="item-details">
+                <span class="item-description">${transaction.description}</span>
+                <span class="item-date">${date}</span>
+            </div>
+            <span class="item-amount">₱${transaction.amount.toFixed(2)}</span>
+            <button class="delete-btn" data-id="${transaction.id}">
+                <svg xmlns="http://www.w3.org/2-000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                </svg>
+            </button>
+        `;
+        transactionList.appendChild(li);
+    }
+
+    // Function to handle adding a new transaction
+    function addTransaction(type) {
+        const description = descriptionInput.value.trim();
+        const amount = parseFloat(amountInput.value.trim());
+
+        // Display a more user-friendly validation message
+        if (description === '' || isNaN(amount) || amount <= 0) {
+            validationMessage.textContent = 'Please enter a valid description and a positive amount.';
+            validationMessage.classList.remove('hidden');
+            setTimeout(() => {
+                validationMessage.classList.add('hidden');
+            }, 3000); // Hide the message after 3 seconds
+            return;
+        }
+
+        const newTransaction = {
+            id: Date.now(),
+            description,
+            amount,
+            type
+        };
+
+        transactions.push(newTransaction);
+        localStorage.setItem('transactions', JSON.stringify(transactions));
+
+        descriptionInput.value = '';
+        amountInput.value = '';
+        amountInput.focus(); // Keep focus on the amount field for quick entry
+
+        updateDisplay();
+    }
+
+    // Function to handle clearing all transactions
+    function clearAllTransactions() {
+        const confirmClear = confirm("Are you sure you want to clear all transactions? This action cannot be undone.");
+        if (confirmClear) {
+            transactions = [];
+            localStorage.setItem('transactions', JSON.stringify(transactions));
+            updateDisplay();
+        }
+    }
+
+    // Event listeners
+    addIncomeBtn.addEventListener('click', () => addTransaction('income'));
+    addExpenseBtn.addEventListener('click', () => addTransaction('expense'));
+    clearTransactionsBtn.addEventListener('click', clearAllTransactions);
+
+    // Handle delete button clicks using event delegation
+    transactionList.addEventListener('click', (e) => {
+        if (e.target.closest('.delete-btn')) {
+            const id = Number(e.target.closest('.delete-btn').dataset.id);
+            transactions = transactions.filter(t => t.id !== id);
+            localStorage.setItem('transactions', JSON.stringify(transactions));
+            updateDisplay();
+        }
+    });
+
+    // Initial render
+    updateDisplay();
+</script>
+
+</body>
+</html>
